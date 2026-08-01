@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 
 @Entity
 class Category(
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String,
 ) {
