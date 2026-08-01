@@ -9,4 +9,5 @@ fun Product.toDto(): ProductDto = ProductDto(
     description = this.description,
     price = this.price,
     imgUrl = this.imgUrl,
+    categories = this.categories.map { it.toDto() }
 )

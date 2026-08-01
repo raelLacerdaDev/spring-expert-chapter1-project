@@ -4,6 +4,9 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
 
 @Entity
 class Product(
@@ -13,7 +16,18 @@ class Product(
     val description: String,
     val price: Double,
     val imgUrl: String,
+
+
+    @ManyToMany
+    @JoinTable(
+        name = "product_categories",
+        joinColumns = [JoinColumn(name = "product_id")],
+        inverseJoinColumns = [JoinColumn(name = "category_id")]
+    )
+    private val _categories: MutableSet<Category> = mutableSetOf(),
 ) {
+    val categories get() = _categories.toList()
+
     override fun toString(): String {
         return "Product(id:$id, name:$name, description:$description, price:$price, imgUrl:$imgUrl)"
     }
@@ -25,4 +39,15 @@ class Product(
     override fun hashCode(): Int {
         return id?.hashCode() ?: 0
     }
+
+    fun addCategory(category: Category) {
+        _categories.add(category)
+        category.addProduct(this)
+    }
+
+    fun removeCategory(category: Category) {
+        _categories.remove(category)
+        category.removeProduct(this)
+    }
+
 }
