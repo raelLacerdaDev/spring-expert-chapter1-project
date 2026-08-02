@@ -4,6 +4,7 @@ package com.raellacerda.chapter1.controllers
 import com.raellacerda.chapter1.services.CategoryService
 import org.springframework.data.domain.Pageable
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -16,5 +17,8 @@ class CategoryController(
 
     @GetMapping
     fun findAll(pageable: Pageable) = categoryService.findAll(pageable)
+
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long) = categoryService.findById(id)
 
 }
