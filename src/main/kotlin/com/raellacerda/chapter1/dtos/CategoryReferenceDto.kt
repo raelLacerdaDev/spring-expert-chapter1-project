@@ -1,4 +1,8 @@
 package com.raellacerda.chapter1.dtos
 
-class CategoryReferenceDto {
-}
+import jakarta.validation.constraints.NotNull
+
+data class CategoryReferenceDto(
+    @field:NotNull(message = "Id is required!")
+    val id: Long
+)

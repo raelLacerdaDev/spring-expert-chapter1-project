@@ -61,3 +61,7 @@ INSERT INTO product_categories (product_id, category_id) VALUES (17, 8); -- Queb
 INSERT INTO product_categories (product_id, category_id) VALUES (18, 10); -- Caixa de Ferramentas -> Ferramentas
 INSERT INTO product_categories (product_id, category_id) VALUES (19, 10); -- Furadeira -> Ferramentas
 INSERT INTO product_categories (product_id, category_id) VALUES (20, 9); -- Óleo de Motor -> Automotivo
+
+
+ALTER TABLE category ALTER COLUMN id RESTART WITH 11;
+ALTER TABLE product ALTER COLUMN id RESTART WITH 21;

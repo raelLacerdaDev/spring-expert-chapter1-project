@@ -1,12 +1,13 @@
 package com.raellacerda.chapter1.controllers
 
 
+import com.raellacerda.chapter1.dtos.CategoryDto
 import com.raellacerda.chapter1.services.CategoryService
+import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
 
 @RestController
@@ -19,6 +20,17 @@ class CategoryController(
     fun findAll(pageable: Pageable) = categoryService.findAll(pageable)
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long) = categoryService.findById(id)
+    fun findById(@PathVariable id: Long) : ResponseEntity<CategoryDto> {
+        val dto = categoryService.findById(id)
+        return ResponseEntity.ok(dto)
+    }
+
+    @PostMapping
+    fun insert(@Valid @RequestBody categoryDto: CategoryDto): ResponseEntity<CategoryDto> {
+        val item = categoryService.insert(categoryDto)
+        val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+            .buildAndExpand(item.id).toUri()
+        return ResponseEntity.created(uri).body(item)
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.raellacerda.chapter1.entities
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -13,6 +14,7 @@ class Product(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String,
+    @Column(length = 2600)
     val description: String,
     val price: Double,
     val imgUrl: String,
@@ -42,12 +44,12 @@ class Product(
 
     fun addCategory(category: Category) {
         _categories.add(category)
-        category.addProduct(this)
+//        category.addProduct(this) - discutir sobre isso
     }
 
     fun removeCategory(category: Category) {
         _categories.remove(category)
-        category.removeProduct(this)
+//        category.removeProduct(this)
     }
 
 }
