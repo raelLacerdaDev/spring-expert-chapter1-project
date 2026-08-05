@@ -5,7 +5,7 @@ import jakarta.validation.constraints.PositiveOrZero
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.URL
 
-data class ProductInsertDto(
+data class ProductRequestDto(
     val id: Long? = null,
 
     @field:NotBlank

@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToMany
 class Category(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val name: String,
+    var name: String,
 
     @ManyToMany(mappedBy = "_categories")
     private val _products: MutableSet<Product> = mutableSetOf(),

@@ -13,11 +13,11 @@ import jakarta.persistence.ManyToMany
 class Product(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val name: String,
+    var name: String,
     @Column(length = 2600)
-    val description: String,
-    val price: Double,
-    val imgUrl: String,
+    var description: String,
+    var price: Double,
+    var imgUrl: String,
 
 
     @ManyToMany
@@ -52,4 +52,7 @@ class Product(
 //        category.removeProduct(this)
     }
 
+    fun clearCategories() {
+        _categories.clear()
+    }
 }

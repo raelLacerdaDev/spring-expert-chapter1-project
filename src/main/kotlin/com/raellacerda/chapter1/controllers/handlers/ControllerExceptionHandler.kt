@@ -1,5 +1,6 @@
 package com.raellacerda.chapter1.controllers.handlers
 
+import com.raellacerda.chapter1.services.exceptions.DatabaseException
 import com.raellacerda.chapter1.services.exceptions.ResourceNotFoundException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
@@ -42,5 +43,15 @@ class ControllerExceptionHandler {
         problemDetail.setProperty("timestamp", Instant.now())
         return problemDetail
     }
+
+    @ExceptionHandler(DatabaseException::class)
+    fun database(e: DatabaseException, request: HttpServletRequest) : ProblemDetail {
+        val problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Data integrity violation")
+        problemDetail.instance = URI.create(request.requestURI)
+        problemDetail.title = "Data integrity violation"
+        problemDetail.setProperty("timestamp", Instant.now())
+        return problemDetail
+    }
+
 
 }
