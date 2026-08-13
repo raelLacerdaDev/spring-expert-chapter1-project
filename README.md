@@ -8,7 +8,7 @@ Além do ecossistema de testes, o projeto aborda tópicos essenciais para APIs r
 
 ## 🚀 Tecnologias e Ferramentas
 
-- **Java & Spring Boot**
+- **Kotlin & Spring Boot**
 - **Testes:** JUnit 5, Mockito, RestAssured, Spring MockMvc
 - **Cobertura de Código:** Jacoco
 - **Segurança:** Spring Security, OAuth2, JWT
