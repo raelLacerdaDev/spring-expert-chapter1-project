@@ -1,12 +1,15 @@
 package com.raellacerda.chapter1.entities
 
 import jakarta.persistence.Entity
+import jakarta.persistence.EntityListeners
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToMany
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 
 @Entity
+@EntityListeners(AuditingEntityListener::class)
 class Category(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

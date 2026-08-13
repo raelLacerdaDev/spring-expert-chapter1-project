@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
@@ -69,7 +70,7 @@ class ProductService(
             }
             val updated = productRepository.save(productReference)
             updated.toDto()
-        } catch (e: EntityNotFoundException) {
+        } catch (_: EntityNotFoundException) {
             throw ResourceNotFoundException("Product with $id not found")
         }
     }
@@ -79,10 +80,9 @@ class ProductService(
         if (!productRepository.existsById(id)) throw ResourceNotFoundException("Product with $id Not Found")
         try {
             productRepository.deleteById(id)
-        } catch (e: DataIntegrityViolationException) {
+        } catch (_: DataIntegrityViolationException) {
             throw DatabaseException("Data Integrity Violation")
         }
-
     }
 
 
